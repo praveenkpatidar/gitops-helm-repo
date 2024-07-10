@@ -1,0 +1,14 @@
+---
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+releases:
+  - name: "cert-manager"
+    version: "v1.15.1"
+    chart: "jetstack/cert-manager"
+    namespace: "kube-system-extensions"
+    missingFileHandler: Warn
+    values:
+      - ./values/values-common.yaml
+      - ./values/values-{{ requiredEnv "CLUSTER" }}.yaml

@@ -1,0 +1,10 @@
+namespaces:
+  - name: kube-system-extensions
+    annotations:
+      "generated-by": helm
+  - name: logging
+    annotations:
+      "generated-by": helm
+  - name: monitoring
+    annotations:
+      "generated-by": helm

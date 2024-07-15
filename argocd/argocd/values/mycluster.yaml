@@ -20,19 +20,19 @@ repoServer:
     #   consumed by helmfile
     #   parsed by GHA
     - name: AWS_ACCOUNT_ALIAS
-      value: cmdlab-sandpit2
+      value: <TODO: Account Alias>
     - name: AWS_ACCOUNT_ID
-      value: "354334841216"
+      value: "<TODO: Account Alias>"
     - name: AWS_REGION
-      value: ap-southeast-2
+      value: <TODO: Account Alias>
     - name: CLUSTER
-      value: eks-cdk-demo-dev
+      value: <TODO: Account Alias>
     - name: CLUSTER_ENDPOINT
-      value: https://E85F3EF3B39F34716CF87F9C750AE832.gr7.ap-southeast-2.eks.amazonaws.com
+      value: <TODO: Account Alias>
     - name: GH_TOKEN
       valueFrom:
         secretKeyRef:
           name: github-secret
           key: password
     - name: SERVICE_KUBE_DNS
-      value: "172.20.0.10"
+      value: "<TODO: Kube DNS IP e.g. 172.20.0.10>"

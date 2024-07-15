@@ -27,7 +27,7 @@ metadata:
 spec:
   project: workload
   source:
-    repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+    repoURL: https://github.com/praveenkpatidar/gitops-in-a-box
     path: argocd/workload
     targetRevision: HEAD
   destination:

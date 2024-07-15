@@ -31,7 +31,7 @@ spec:
             valueFiles:
               - "$values/argocd/platform/values/default/{{ appName }}.yaml"
               - "$values/argocd/platform/values/{{metadata.labels.aws-cluster-name}}/{{ appName }}.yaml"
-        - repoURL: "https://github.com/praveenkpatidar/gitops-helm-repo"
+        - repoURL: "https://github.com/praveenkpatidar/gitops-in-a-box"
           targetRevision: HEAD
           ref: values
       destination:

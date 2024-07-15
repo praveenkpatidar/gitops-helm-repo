@@ -2,32 +2,34 @@
 # https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#repository-credentials
 
 # No Secrets in below so can be managed in Source Control
+# TODO Review all repos and keep only which is needed.
 apiVersion: v1
 kind: Secret
 metadata:
-  name: aws-cdk-eks-demo
+  name: repo1
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: https://github.com/praveenkpatidar/aws-cdk-eks-demo
+  url: https://github.com/praveenkpatidar/repo1
   project: default
 ---
 # No Secrets in below so can be managed in Source Control
 apiVersion: v1
 kind: Secret
 metadata:
-  name: gitops-helm-repo
+  name: gitops-in-a-box
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: https://github.com/praveenkpatidar/gitops-helm-repo
+  url: https://github.com/praveenkpatidar/gitops-in-a-box
   project: default
 ---
 # This can be managed in external secret management e.g. SealedSecrets or External Secrets in Source Control
+# Create this if the repos are no public.
 apiVersion: v1
 kind: Secret
 metadata:
@@ -44,7 +46,7 @@ data:
   project: <Base64 encoded Project Name>
 type: Opaque
 ---
-# Maintain this for in-cluster or multi cluster environment
+# Maintain this for in-cluster
 apiVersion: v1
 stringData:
   config: |
@@ -58,40 +60,15 @@ stringData:
 kind: Secret
 metadata:
   annotations:
-    aws-cluster-name: eks-cdk-demo-dev
+    aws-cluster-name: mycluster
     aws-region: us-west-2
     environment: dev
   labels:
     argocd.argoproj.io/secret-type: cluster
-    aws-cluster-name: eks-cdk-demo-dev
+    aws-cluster-name: mycluster
     aws-region: us-west-2
     environment: dev
   name: in-cluster
   namespace: argocd
 type: Opaque
 ---
-# Maintain this for in-cluster or multi cluster environment
-apiVersion: v1
-stringData:
-  config: |
-    {
-    "tlsClientConfig": {
-      "insecure": false
-      }
-    }
-  name: in-cluster
-  server: https://kubernetes.default.svc
-kind: Secret
-metadata:
-  annotations:
-    aws-cluster-name: eks-cdk-demo-dev
-    aws-region: us-west-2
-    environment: dev
-  labels:
-    argocd.argoproj.io/secret-type: cluster
-    aws-cluster-name: eks-cdk-demo-dev
-    aws-region: us-west-2
-    environment: dev
-  name: eks-cdk-demo-dev
-  namespace: argocd
-type: Opaque

@@ -9,13 +9,13 @@ spec:
         elements:
           - appName: helm-guestbook
             namespace: helm-guestbook
-            repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+            repoURL: https://github.com/praveenkpatidar/gitops-in-a-box
             path: argocd/workload
             targetRevision: HEAD
 
           - appName: helm-game
             namespace: helm-game
-            repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+            repoURL: https://github.com/praveenkpatidar/gitops-in-a-box
             path: argocd/workload
             targetRevision: HEAD
   template:
@@ -31,7 +31,7 @@ spec:
             valueFiles:
               - "$values/argocd/workload/values/default/{{ appName }}.yaml"
               - "$values/argocd/workload/values/{{metadata.labels.aws-cluster-name}}/{{ appName }}.yaml"
-        - repoURL: "https://github.com/praveenkpatidar/gitops-helm-repo"
+        - repoURL: "https://github.com/praveenkpatidar/gitops-in-a-box"
           targetRevision: HEAD
           ref: values
       destination:

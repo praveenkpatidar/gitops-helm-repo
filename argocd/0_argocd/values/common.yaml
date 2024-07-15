@@ -1,0 +1,23 @@
+# values.yaml
+global:
+  tolerations:
+    - key: CriticalAddonsOnly
+      operator: Exists
+
+redis:
+  enabled: true
+  ha:
+    enabled: true
+
+server:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+  ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
+configs:
+  cm:
+    create: true
+
+repoServer:

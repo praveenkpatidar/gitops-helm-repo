@@ -1,0 +1,39 @@
+# Local Application Set that Referres the local manifests.
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workload-appset-local
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - appName: game
+            namespace: game-2048
+            repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+            path: argocd/workload
+            targetRevision: HEAD
+
+          - appName: guestbook
+            namespace: guestbook
+            repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+            path: argocd/workload
+            targetRevision: HEAD
+  template:
+    metadata:
+      name: "workload-{{appName}}"
+    spec:
+      project: workload
+      source:
+        repoURL: "{{ repoURL }}"
+        path: "{{ path }}/{{ appName }}"
+        targetRevision: "{{ targetRevision }}"
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

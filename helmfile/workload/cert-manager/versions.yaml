@@ -1,7 +1,0 @@
----
-
-default:
-  release_name: "cert-manager"
-  version: "v1.10.1"
-  chart: "jetstack/cert-manager"
-  namespace: "kube-system-extensions"

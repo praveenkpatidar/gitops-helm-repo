@@ -1,4 +1,0 @@
-namespaces:
-  - name: workload
-    annotations:
-      "generated-by": helm

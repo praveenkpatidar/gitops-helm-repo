@@ -1,0 +1,3 @@
+alertmanager:
+  annotations:
+    "alertmanager-config-1": "default" # sample values for test

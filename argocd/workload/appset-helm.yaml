@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: workload-appset-helm
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - appName: helm-guestbook
+            namespace: helm-guestbook
+            repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+            path: argocd/workload
+            targetRevision: HEAD
+
+          - appName: helm-game
+            namespace: helm-game
+            repoURL: https://github.com/praveenkpatidar/gitops-helm-repo
+            path: argocd/workload
+            targetRevision: HEAD
+  template:
+    metadata:
+      name: "workload-{{appName}}" # to solve the duplication error in release name and argocd app name
+    spec:
+      project: workload
+      sources:
+        - repoURL: "{{ repoURL }}"
+          targetRevision: "{{ targetRevision }}"
+          path: "{{ path }}/{{ appName }}"
+          helm:
+            valueFiles:
+              - "$values/argocd/workload/values/default/{{ appName }}.yaml"
+              - "$values/argocd/workload/values/{{metadata.labels.aws-cluster-name}}/{{ appName }}.yaml"
+        - repoURL: "https://github.com/praveenkpatidar/gitops-helm-repo"
+          targetRevision: HEAD
+          ref: values
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

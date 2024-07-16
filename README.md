@@ -32,12 +32,12 @@
 
 ### Install ArgoCD 
   
-    CD argocd
+    CD argocd/argocd
     helmfile apply
 
 ### Run Init
     
-    CD init
+    CD argocd/init
     helmfile apply
 
 

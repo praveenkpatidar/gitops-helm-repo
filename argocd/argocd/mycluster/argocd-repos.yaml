@@ -29,7 +29,7 @@ stringData:
   project: default
 ---
 # This can be managed in external secret management e.g. SealedSecrets or External Secrets in Source Control
-# Create this if the repos are no public.
+# Create this if the repos are private.
 apiVersion: v1
 kind: Secret
 metadata:

@@ -11,6 +11,6 @@ releases:
       - ./values/common.yaml
       - ./values/{{ requiredEnv "CLUSTER" }}.yaml
 
-  - name: clustersecret
+  - name: argocd-repos
     namespace: argocd
     chart: ./{{ requiredEnv "CLUSTER" }}
